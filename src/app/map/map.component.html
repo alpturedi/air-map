@@ -1,0 +1,12 @@
+<div class="flex flex-col items-center justify-center h-[97vh] bg-gray-100">
+  <google-map width="95vw" height="95vh" [options]="mapOptions">
+    @for (item of markers; track item) {
+    <map-advanced-marker
+      #marker="mapAdvancedMarker"
+      [options]="item.options"
+      (mapClick)="openInfoWindow(marker, item)"
+    />
+    }
+    <map-info-window [innerHTML]="infoWindowContent"></map-info-window>
+  </google-map>
+</div>
