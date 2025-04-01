@@ -1,5 +1,5 @@
-<div class="flex flex-col items-center justify-center h-[97vh] bg-gray-100">
-  <google-map width="95vw" height="95vh" [options]="mapOptions">
+<div class="flex flex-col items-center justify-center bg-gray-100">
+  <google-map width="90vw" height="90vh" [options]="mapOptions">
     @for (item of markers; track item) {
     <map-advanced-marker
       #marker="mapAdvancedMarker"

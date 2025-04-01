@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { GoogleMap, MapAdvancedMarker, MapInfoWindow } from "@angular/google-maps";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../environments/environment";
 
 type MarkerOptions = google.maps.marker.AdvancedMarkerElementOptions;
 type Marker = { options: MarkerOptions; iata: string };
@@ -42,9 +42,11 @@ export class MapComponent implements OnInit {
       }
       const json = await response.json();
 
-      var nextFlights = "";
+      let nextFlights = `<span class="font-bold text-lg">${marker?.options?.title ?? ""}</span><br/>`;
       (json?.response ?? []).slice(0, 5).forEach((flight: any) => {
-        nextFlights += `Flight: ${flight.flight_iata} - Departure: ${flight.dep_time} - Arrival: ${flight.arr_iata}<br>`;
+        nextFlights += `Flight: ${flight.flight_iata} - Departure:${flight.dep_time.slice(
+          flight.dep_time.lastIndexOf(" ")
+        )} - Arrival: ${flight.arr_iata}<br>`;
       });
       this.infoWindowContent = nextFlights;
       console.log("¡ ⛰️ getFlights ⛰️ !", json?.response, nextFlights);
