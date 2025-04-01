@@ -1,0 +1,18 @@
+{
+  "app": {
+    "home": "Ana Sayfa",
+    "about": "Hakkında",
+    "airports": "Havalimanları"
+  },
+  "map": {
+    "nextFlights": "Uçuş: {{flight}} - Kalkış:{{time}} - Hedef: {{destination}}<br>"
+  },
+  "about": {
+    "whoWeAre": "Biz Kimiz",
+    "whoWeAreText": "Biz, gökyüzü üzerinden dünyayı keşfetmeyi seven bir grup havacılık meraklısıyız. Amacımız, size en iyi uçuş bilgilerini sağlamak ve yeni destinasyonlar keşfetmenize yardımcı olmaktır.",
+    "ourMission": "Misyonumuz",
+    "ourMissionText": "Misyonumuz, size en iyi uçuş bilgilerini sağlamak ve yeni destinasyonlar keşfetmenize yardımcı olmaktır. Seyahat deneyiminizi mümkün olduğunca sorunsuz ve keyifli hale getirmeye çalışıyoruz.",
+    "whyChooseUs": "Neden Bizi Seçmelisiniz",
+    "whyChooseUsText": "Size en iyi uçuş bilgilerini sağlama ve yeni destinasyonlar keşfetmenize yardımcı olma konusunda kararlıyız. Havacılık meraklılarından oluşan ekibimiz, her türlü soru veya endişeniz için her zaman burada."
+  }
+}

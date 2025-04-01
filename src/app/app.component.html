@@ -170,12 +170,24 @@
   <h1 class="text-lg font-bold">Air Map</h1>
   <nav class="flex items-center space-x-4">
     <ul class="flex space-x-4">
-      <li><a href="/" class="hover:text-gray-400">Home</a></li>
-      <li><a href="/about" class="hover:text-gray-400">About</a></li>
+      <li>
+        <a href="/" class="hover:text-gray-400">{{ "app.home" | translate }}</a>
+      </li>
+      <li>
+        <a href="/airports" class="hover:text-gray-400">{{ "app.airports" | translate }}</a>
+      </li>
+      <li>
+        <a href="/about" class="hover:text-gray-400">{{ "app.about" | translate }}</a>
+      </li>
     </ul>
-    <select id="languageSwitcher" class="bg-gray-700 text-white p-1 rounded">
+    <select
+      id="languageSwitcher"
+      (change)="changeLanguage($event)"
+      [value]="selectedLanguage"
+      class="bg-gray-700 text-white p-1 rounded"
+    >
       <option value="en">English</option>
-      <option value="ee">Eesti keel</option>
+      <option value="tr">Türkçe</option>
     </select>
   </nav>
 </header>

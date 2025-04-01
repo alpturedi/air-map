@@ -1,0 +1,18 @@
+{
+  "app": {
+    "home": "Home",
+    "about": "About",
+    "airports": "Airports"
+  },
+  "map": {
+    "nextFlights": "Flight: {{flight}} - Departure:{{time}} - Arrival: {{destination}}<br>"
+  },
+  "about": {
+    "whoWeAre": "Who We Are",
+    "whoWeAreText": "We are a group of aviation enthusiasts who love to explore the world through the skies. Our mission is to provide you with the best flight information and help you discover new destinations.",
+    "ourMission": "Our Mission",
+    "ourMissionText": "Our mission is to provide you with the best flight information and help you discover new destinations. We strive to make your travel experience as smooth and enjoyable as possible.",
+    "whyChooseUs": "Why Choose Us",
+    "whyChooseUsText": "We are committed to providing you with the best flight information and helping you discover new destinations. Our team of aviation enthusiasts is always here to help you with any questions or concerns you may have."
+  }
+}

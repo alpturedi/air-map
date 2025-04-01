@@ -4,7 +4,7 @@ import { environment } from "../../../environments/environment";
 
 type MarkerOptions = google.maps.marker.AdvancedMarkerElementOptions;
 type Marker = { options: MarkerOptions; iata: string };
-
+import { TranslateService, _ } from "@ngx-translate/core";
 @Component({
   selector: "app-map",
   imports: [GoogleMap, MapAdvancedMarker, MapInfoWindow],
@@ -13,6 +13,13 @@ type Marker = { options: MarkerOptions; iata: string };
 })
 export class MapComponent implements OnInit {
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+
+  constructor(private translate: TranslateService) {
+    this.translate.get(_("map.nextFlights"), { flight: "Test", time: "testst" }).subscribe((res: string) => {
+      console.log(res);
+      //=> 'hello world'
+    });
+  }
 
   mapOptions: google.maps.MapOptions = {
     zoom: 4.5,
@@ -44,18 +51,19 @@ export class MapComponent implements OnInit {
 
       let nextFlights = `<span class="font-bold text-lg">${marker?.options?.title ?? ""}</span><br/>`;
       (json?.response ?? []).slice(0, 5).forEach((flight: any) => {
-        nextFlights += `Flight: ${flight.flight_iata} - Departure:${flight.dep_time.slice(
-          flight.dep_time.lastIndexOf(" ")
-        )} - Arrival: ${flight.arr_iata}<br>`;
+        nextFlights += this.translate.instant("map.nextFlights", {
+          flight: flight.flight_iata,
+          time: flight.dep_time.slice(flight.dep_time.lastIndexOf(" ")),
+          destination: flight.arr_iata,
+        });
       });
       this.infoWindowContent = nextFlights;
-      console.log("¡ ⛰️ getFlights ⛰️ !", json?.response, nextFlights);
     } catch (error: any) {
-      console.error(error?.message);
+      console.error("Error getting flights :", error?.message);
     }
   }
 
-  infoWindowContent = "";
+  infoWindowContent = "Test";
   openInfoWindow(markerRef: MapAdvancedMarker, marker: Marker) {
     console.log("openInfoWindow", markerRef);
     this.infoWindowContent = marker.options.title ?? "";
@@ -67,7 +75,7 @@ export class MapComponent implements OnInit {
     (async () => {
       const airports = localStorage.getItem("airports");
       if ((airports?.length ?? 0) > 0) {
-        this.markers = JSON.parse(airports ?? "");
+        this.markers = parseAirports(JSON.parse(airports ?? "[]"));
         return;
       }
 
@@ -79,23 +87,26 @@ export class MapComponent implements OnInit {
         }
         const json = await response.json();
 
-        const parsedAirports = json.response
-          .filter((item: any) => item?.["iata_code"] != null)
-          .map((item: any) => ({
-            options: {
-              position: { lat: item.lat, lng: item.lng },
-              title: item.name,
-              gmpClickable: true,
-            },
-            iata: item.iata_code,
-          }));
+        localStorage.setItem(
+          "airports",
+          JSON.stringify(json.response.filter((item: any) => item?.["iata_code"] != null))
+        );
 
-        localStorage.setItem("airports", JSON.stringify(parsedAirports));
-
-        this.markers = parsedAirports;
+        this.markers = parseAirports(json.response);
       } catch (error: any) {
         console.error(error?.message);
       }
     })();
   }
+}
+
+function parseAirports(rawList: any[]) {
+  return rawList.map((item: any) => ({
+    options: {
+      position: { lat: item.lat, lng: item.lng },
+      title: item.name,
+      gmpClickable: true,
+    },
+    iata: item.iata_code,
+  }));
 }

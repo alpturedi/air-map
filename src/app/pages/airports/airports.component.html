@@ -1,0 +1,13 @@
+<p-accordion value="0">
+  @for(airport of airports; track airport){
+  <p-accordion-panel #panel [value]="$index">
+    <p-accordion-header>{{ airport.name }}</p-accordion-header>
+    <p-accordion-content>
+      <p class="m-0">
+        {{ airport.iata_code }}
+      </p>
+      <p class="m-0">{{ airport.lat }} / {{ airport.lng }}</p>
+    </p-accordion-content>
+  </p-accordion-panel>
+  }
+</p-accordion>
