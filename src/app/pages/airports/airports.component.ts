@@ -11,7 +11,7 @@ import { environment } from "../../../environments/environment";
 export class AirportsComponent implements OnInit {
   airports: any[] = [];
   ngOnInit() {
-    const airports = JSON.parse(localStorage.getItem("airports") ?? "[]");
+    const airports = JSON.parse(sessionStorage.getItem("airports") ?? "[]");
     if (!Array.isArray(airports) || airports?.length <= 0) {
       getAirports().then((airports) => {
         this.airports = airports;
@@ -33,7 +33,7 @@ async function getAirports() {
     const json = await response.json();
     const airports = json.response.filter((item: any) => item?.["iata_code"] != null);
 
-    localStorage.setItem("airports", JSON.stringify(airports));
+    sessionStorage.setItem("airports", JSON.stringify(airports));
 
     return airports;
   } catch (error: any) {

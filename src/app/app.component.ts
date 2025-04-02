@@ -15,7 +15,7 @@ export class AppComponent {
   selectedLanguage = "en";
 
   constructor(private translate: TranslateService) {
-    const storedLocale = localStorage.getItem("locale");
+    const storedLocale = sessionStorage.getItem("locale");
     translate.setTranslation("en", translationsEN);
     translate.setTranslation("tr", translationsTR);
     if (storedLocale === "tr") {
@@ -31,6 +31,6 @@ export class AppComponent {
     const newLanguage = ($event?.target as HTMLSelectElement)?.value === "tr" ? "tr" : "en";
     this.translate.use(newLanguage);
     this.selectedLanguage = newLanguage;
-    localStorage.setItem("locale", newLanguage);
+    sessionStorage.setItem("locale", newLanguage);
   }
 }

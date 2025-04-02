@@ -15,10 +15,7 @@ export class MapComponent implements OnInit {
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
 
   constructor(private translate: TranslateService) {
-    this.translate.get(_("map.nextFlights"), { flight: "Test", time: "testst" }).subscribe((res: string) => {
-      console.log(res);
-      //=> 'hello world'
-    });
+    this.translate;
   }
 
   mapOptions: google.maps.MapOptions = {
@@ -63,9 +60,8 @@ export class MapComponent implements OnInit {
     }
   }
 
-  infoWindowContent = "Test";
+  infoWindowContent = "";
   openInfoWindow(markerRef: MapAdvancedMarker, marker: Marker) {
-    console.log("openInfoWindow", markerRef);
     this.infoWindowContent = marker.options.title ?? "";
     this.infoWindow.open(markerRef);
     this.getFlights(marker);
@@ -73,7 +69,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     (async () => {
-      const airports = localStorage.getItem("airports");
+      const airports = sessionStorage.getItem("airports");
       if ((airports?.length ?? 0) > 0) {
         this.markers = parseAirports(JSON.parse(airports ?? "[]"));
         return;
@@ -87,7 +83,7 @@ export class MapComponent implements OnInit {
         }
         const json = await response.json();
 
-        localStorage.setItem(
+        sessionStorage.setItem(
           "airports",
           JSON.stringify(json.response.filter((item: any) => item?.["iata_code"] != null))
         );
