@@ -47,13 +47,17 @@ export class MapComponent implements OnInit {
       const json = await response.json();
 
       let nextFlights = `<span class="font-bold text-lg">${marker?.options?.title ?? ""}</span><br/>`;
-      (json?.response ?? []).slice(0, 5).forEach((flight: any) => {
-        nextFlights += this.translate.instant("map.nextFlights", {
-          flight: flight.flight_iata,
-          time: flight.dep_time.slice(flight.dep_time.lastIndexOf(" ")),
-          destination: flight.arr_iata,
+      if (!Array.isArray(json?.response) || json?.response?.length === 0) {
+        nextFlights += this.translate.instant("map.noFlights");
+      } else {
+        (json?.response ?? []).slice(0, 5).forEach((flight: any) => {
+          nextFlights += this.translate.instant("map.nextFlights", {
+            flight: flight.flight_iata,
+            time: flight.dep_time.slice(flight.dep_time.lastIndexOf(" ")),
+            destination: flight.arr_iata,
+          });
         });
-      });
+      }
       this.infoWindowContent = nextFlights;
     } catch (error: any) {
       console.error("Error getting flights :", error?.message);

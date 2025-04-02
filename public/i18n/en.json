@@ -5,7 +5,8 @@
     "airports": "Airports"
   },
   "map": {
-    "nextFlights": "Flight: {{flight}} - Departure:{{time}} - Arrival: {{destination}}<br>"
+    "nextFlights": "Flight: {{flight}} - Departure:{{time}} - Arrival: {{destination}}<br>",
+    "noFlights": "No Flights Found"
   },
   "about": {
     "whoWeAre": "Who We Are",

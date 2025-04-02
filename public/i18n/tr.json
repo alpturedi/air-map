@@ -5,7 +5,8 @@
     "airports": "Havalimanları"
   },
   "map": {
-    "nextFlights": "Uçuş: {{flight}} - Kalkış:{{time}} - Hedef: {{destination}}<br>"
+    "nextFlights": "Uçuş: {{flight}} - Kalkış:{{time}} - Hedef: {{destination}}<br>",
+    "noFlights": "Uçuş Bulunamadı"
   },
   "about": {
     "whoWeAre": "Biz Kimiz",
